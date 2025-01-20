@@ -1,0 +1,5 @@
+{
+  "/public/libros/[id]/page": "app/public/libros/[id]/page.js",
+  "/public/preguntas-frecuentes/page": "app/public/preguntas-frecuentes/page.js",
+  "/public/libros/page": "app/public/libros/page.js"
+}
