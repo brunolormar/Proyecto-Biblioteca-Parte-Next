@@ -1,0 +1,43 @@
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { getLibro } from "@/model/libros/datalibro";
+import Link from "next/link";
+import {buttonVariants} from '@/components/ui/button'
+
+interface Props {
+    params: {
+        id: string;
+    };
+}
+
+async function ProductDetailPage({ params }: Props) {
+  const libro = await getLibro(params.id);
+
+  return <div
+    className="flex justify-center items-center h-screen"
+  >
+    <Card>
+        <CardHeader>
+            <CardTitle className="flex justify-between">
+                Product Detail: {libro.id}
+                <Link
+                    className={buttonVariants()}
+                    href="/admin"
+                >
+                    Go back
+                </Link>
+            </CardTitle>
+        </CardHeader>
+        <CardContent>
+            <h1>{libro.titulo}</h1>
+            <p>{libro.clasificacion}</p>
+            <p>${libro.situacion}</p>
+            <img src={libro.portada} alt="" 
+                className="w-full h-64 object-cover"
+            />
+        </CardContent>
+    </Card>
+
+  </div>;
+}
+
+export default ProductDetailPage;

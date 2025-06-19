@@ -1,5 +1,9 @@
 {
-  "/public/libros/[id]/page": "app/public/libros/[id]/page.js",
-  "/public/preguntas-frecuentes/page": "app/public/preguntas-frecuentes/page.js",
-  "/public/libros/page": "app/public/libros/page.js"
+  "/_not-found/page": "app/_not-found/page.js",
+  "/public/libros/page": "app/public/libros/page.js",
+  "/admin/libros/[id]/edit/page": "app/admin/libros/[id]/edit/page.js",
+  "/public/page": "app/public/page.js",
+  "/admin/dashboard/libros/page": "app/admin/dashboard/libros/page.js",
+  "/admin/dashboard/libros/new/page": "app/admin/dashboard/libros/new/page.js",
+  "/admin/dashboard/page": "app/admin/dashboard/page.js"
 }

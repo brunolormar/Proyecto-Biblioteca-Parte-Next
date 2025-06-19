@@ -1,0 +1,40 @@
+import React, { FC } from "react";
+import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from "@nextui-org/react";
+import { IColumn, ILibro } from "@/interfaces/ILibros";
+
+interface Props {
+    libros: ILibro[],
+    columns: IColumn[]
+}
+
+export const AdminDataGrid: FC<Props> = ({ libros, columns }) => {
+  return (
+    <Table aria-label="Libros Data Table" className="border-collapse border w-4/5">
+      <TableHeader>
+        <TableRow>
+          {columns.map((col) => (
+            <TableColumn key={col.label} className="border border-slate-300">
+              {col.label}
+            </TableColumn>
+          ))}
+        </TableRow>
+      </TableHeader>
+
+      <TableBody>
+        {libros.map((libro) => (
+          <TableRow key={libro.id}>
+            <TableCell>{libro.isbn}</TableCell>
+            <TableCell>{libro.titulo}</TableCell>
+            <TableCell>{libro.numero_de_paginas}</TableCell>
+            <TableCell>{libro.situacion}</TableCell>
+            <TableCell>
+              <img className="h-20 w-20" src={libro.portada} alt={libro.titulo} />
+            </TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  );
+};
+
+export default AdminDataGrid;

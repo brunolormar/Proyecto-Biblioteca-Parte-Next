@@ -1,11 +1,13 @@
 'use client'
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Cookies from "js-cookie";
 import { useRouter } from 'next/navigation';
 import { Link } from "@nextui-org/react";
 import { useForm, SubmitHandler } from "react-hook-form"
 import { ILogin } from "../interfaces/ILogin";
 import apiAuth from "../model/apiAuth";
+import { AuthContext } from "@/app/context/auth";
+
 
 //type FormData = {
 //  email:string,
@@ -16,25 +18,24 @@ const LoginForm = () => {
   const router= useRouter()
   const { register, handleSubmit, /*formState: { errors }*/ } = useForm<ILogin>()
   // const [ showError, setShowError ] = useState(false);
+  const { loginUser, user } = useContext(AuthContext);
 
   const onLoginUser = async ({email, password}: ILogin ) => {
       /*setShowError(false);*/
       console.log(email, password);
   
       try{
-        const login = { email, password }
-        // const data =  await apiAuth.login({ email, password });
-        const data =  await apiAuth.login(login);
-      
-        console.log(data);
-        const { token, user } = data;
-        console.log(user);
-        Cookies.set('token', token);
-        Cookies.set('email', user.email);
-        console.log('--->', Cookies.get('email'));
-        // router.replace('/public/libros');
-        router.replace('/public/libros');
+        const loggedInUser = await loginUser({ email, password });
+          if (!loggedInUser) return;
 
+          // Verificamos si el nombre incluye "admin"
+          if (loggedInUser.username.toLowerCase().includes("admin")) {
+            router.replace("/admin/dashboard");
+          } else {
+            router.replace("/public");
+            // router.replace('/public/libros');
+          }
+          
       } catch (error){
         console.log(error);
         /*setShowError(true)*/
